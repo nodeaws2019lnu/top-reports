@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ReportsListComponent } from './components/reports-list/reports-list.component';
 
 @NgModule({
-  declarations: [ReportsListComponent],
+  declarations: [
+    ReportsListComponent
+  ],
   imports: [
     CommonModule
   ],
