@@ -1,3 +1,5 @@
-<p>
-  reports-list works!
-</p>
+<div class="reports-list-container">
+  <div class="report-list-item-view" *ngFor="let report of reports">
+    <mat-card>{{report.name}}</mat-card>
+  </div>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ReportsService } from '../../services/reports.service';
+import { ReportListItem } from '../../models/report-list-item';
 
 @Component({
   selector: 'reports-list',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportsListComponent implements OnInit {
 
-  constructor() { }
+  reports: ReportListItem[];
+
+  constructor(private reportsService: ReportsService) { }
 
   ngOnInit() {
+    this.reportsService.getReports().subscribe((reports: ReportListItem[]) => {
+      this.reports = reports;
+    });
   }
-
 }

@@ -8,6 +8,7 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReportsModule } from './modules/reports/reports.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ReportsModule } from './modules/reports/reports.module';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    ReportsModule
+    ReportsModule,
+    CoreModule
   ],
   bootstrap: [AppComponent]
 })
