@@ -2,11 +2,15 @@
     margin: 1em auto;
 }
 
-.mat-card {
+.mat-card-header {
     display: flex;
     align-items: center;
 }
 
 .edit-report-btn {
     margin-left: auto;
+}
+
+.mat-card-header-text {
+    margin: 0 !important;
 }

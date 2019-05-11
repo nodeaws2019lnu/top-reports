@@ -14,8 +14,26 @@ export class ReportsService {
   // MOCKED
   public get() : Observable<Report[]> {
     const data: Report[] = [
-      { id: 1, name: 'Report 1', isRepeated: false },
-      { id: 2, name: 'Report 2', isRepeated: true, repeatSchedule: "0 0 * ? * *" }
+      { 
+        id: 1,
+        name: 'Users count', 
+        isRepeated: false,
+        command: 
+`SELECT 
+  COUNT(1) AS [Count] 
+FROM [dbo].[Users]`
+      },
+      { 
+        id: 2, 
+        name: 'Names and emails', 
+        isRepeated: true, 
+        repeatSchedule: '0 0 * ? * *',
+        command: 
+`SELECT 
+  [Name],
+  [Email]
+FROM [dbo.Users]`, 
+      }
     ];
 
     return of(data);
