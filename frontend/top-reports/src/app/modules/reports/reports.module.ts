@@ -1,18 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReportsListComponent } from './components/reports-list/reports-list.component';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule } from '@angular/material';
+import { ReportComponent } from './components/report/report.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    ReportsListComponent
+    ReportsListComponent,
+    ReportComponent
   ],
   imports: [
     CommonModule,
-    MatCardModule
+    FormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSlideToggleModule
   ],
   exports: [
     ReportsListComponent
+  ],
+  entryComponents: [
+    ReportComponent
   ]
 })
 export class ReportsModule { }

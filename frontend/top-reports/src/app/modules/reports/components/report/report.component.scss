@@ -1,0 +1,10 @@
+.mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+    width: 40vw;
+}
+
+.mat-dialog-actions button:first-child {
+    margin-left: auto;
+}
