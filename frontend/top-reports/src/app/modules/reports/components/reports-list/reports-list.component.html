@@ -1,5 +1,37 @@
+<button 
+  mat-raised-button 
+  matTooltip="Create new report"
+  (click)="addReport()">
+  Add new report
+</button>
 <div class="reports-list-container">
-  <div class="report-list-item-view" *ngFor="let report of reports">
-    <mat-card>{{report.name}}</mat-card>
+  <div class="report-view" *ngFor="let report of reports">
+    <mat-card>
+      <mat-card-header>
+        <h2>{{report.name}}</h2>
+      
+        <button class="edit-report-btn" mat-icon-button matTooltip="Edit report" (click)="editReport(report)">
+          <mat-icon aria-label="Edit">create</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Delete report" (click)="deleteReport(report.id)">
+          <mat-icon aria-label="Delete">clear</mat-icon>
+        </button>
+      </mat-card-header>
+
+      <mat-card-actions>
+        <button mat-raised-button matTooltip="Run report now">
+          <mat-icon aria-label="Run">play_arrow</mat-icon>
+          Run
+        </button>
+        <button mat-raised-button matTooltip="Get latest result">
+          <mat-icon aria-label="Result">get_app</mat-icon>
+          Result
+        </button>
+        <button mat-raised-button matTooltip="View history">
+          <mat-icon aria-label="History">history</mat-icon>
+          History
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>

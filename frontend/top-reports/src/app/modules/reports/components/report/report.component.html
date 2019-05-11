@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{isEdit() ? 'Edit' : 'Add new'}} report</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Name" [(ngModel)]="data.name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput class="command-textarea" placeholder="Command" [(ngModel)]="data.command"></textarea>
+  </mat-form-field>
+
+  <mat-slide-toggle
+    [(ngModel)]="data.isRepeated">
+    Is repeated
+  </mat-slide-toggle>
+
+  <mat-form-field *ngIf="data.isRepeated">
+    <input matInput placeholder="Cron pattern" [(ngModel)]="data.repeatSchedule">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button (click)="onSaveClicked()" cdkFocusInitial>Save</button>
+</div>
