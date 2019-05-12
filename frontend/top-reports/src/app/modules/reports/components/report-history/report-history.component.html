@@ -1,0 +1,19 @@
+<h1>Run history</h1>
+
+<div class="report-results-list-container">
+  <div class="report-results-view" *ngFor="let result of records">
+    <mat-card>
+
+      <mat-card-content>
+        <h2>Time: {{result.timeFinished}}</h2>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button matTooltip="Download result">
+          <mat-icon aria-label="Result">get_app</mat-icon>
+          Result
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
