@@ -46,7 +46,7 @@ function mapDbReport(dbReport) {
         "startDate": dbReport.start_date,
         "endDate": dbReport.end_date,
         "execTime": dbReport.exec_time,
-        "periodMode": dbReport.periodMode
+        "periodMode": dbReport.period_mode
     };
 }
 
@@ -154,6 +154,30 @@ module.exports = {
             .then(({rows}) => {
                 return rows.map(mapDbReport);
             });
+    },
+    updateReport: function (reportData) {
+        if (!validateReport(reportData)) {
+            return Promise.reject(new ValidationError("Invalid parameters"));
+        }
+
+        return db.query(`UPDATE report
+                         SET report_name = ?,
+                             end_date    = to_date(?, 'YYYY-MM-DD'),
+                             exec_time   = to_timestamp(?, 'HH24-MI-SS')::time
+                         WHERE id = ? RETURNING *`,
+            [reportData.name, reportData.endDate, reportData.execTime, reportData.id])
+            .then(({rows}) => {
+                if (rows.length === 0) {
+                    return Promise.reject("No report found")
+                }
+
+                return mapDbReport(rows[0]);
+            });
+    },
+    deleteReport: function (id) {
+        return db.query(`DELETE
+                         FROM report
+                         where id = ?`, [id]);
     },
     createReport: function (reportData) {
         if (!validateReport(reportData)) {
