@@ -24,6 +24,8 @@ app.use(function (req, res, next) {
 
 app.use('/reports', reportsRouter);
 
+app.listen(3000);
+
 
 //For testing purposes uncomment code to send messages to sqs on startup
 /* reportservice.requestReports(); */
