@@ -26,4 +26,11 @@ export class ReportsHistoryService {
 
     return of(data);
   }
+  
+  // MOCKED
+  public getResult(id: number) : Observable<Blob> {
+    const data = new Blob(['hello there'], { type: 'text/csv' });
+
+    return of(data);
+  }
 }

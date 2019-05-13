@@ -29,4 +29,15 @@ export class ReportHistoryComponent implements OnInit {
     });
   }
 
+  downloadResult(id: number) {
+    this.reportsHistoryService.getResult(id).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    })
+  }
 }
