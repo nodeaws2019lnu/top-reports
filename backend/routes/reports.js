@@ -36,7 +36,7 @@ router.post('/', defaultErrorHandling(function (req, res) {
 
 router.get('/', defaultErrorHandling(function (req, res) {
     return reportservice.getReports().then(reports => {
-        res.json({data: reports});
+        res.json(reports);
     });
 }));
 
