@@ -1,7 +1,8 @@
 const {Pool} = require('pg');
 const crypto = require('crypto');
 
-const connectionString = process.env.DATABASE_URL || 'postgres://postgres:password@localhost:5432/ReportSvc?username=postgres&password=password';
+const connectionString = process.env.DATABASE_URL ||
+    'postgres://report-svc-user:password@report-svc.cesdohjzgtpg.eu-west-2.rds.amazonaws.com:5432/report-svc?username=report-svc-user&password=password';
 
 const pool = new Pool({
     connectionString: connectionString
