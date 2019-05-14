@@ -4,11 +4,13 @@ import { ReportsListComponent } from './components/reports-list/reports-list.com
 import { MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule } from '@angular/material';
 import { ReportComponent } from './components/report/report.component';
 import { FormsModule } from '@angular/forms';
+import { ReportHistoryComponent } from './components/report-history/report-history.component';
 
 @NgModule({
   declarations: [
     ReportsListComponent,
-    ReportComponent
+    ReportComponent,
+    ReportHistoryComponent
   ],
   imports: [
     CommonModule,

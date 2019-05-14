@@ -3,6 +3,7 @@ import { ReportsService } from '../../services/reports.service';
 import { Report } from '../../models/report';
 import { MatDialog } from '@angular/material';
 import { ReportComponent } from '../report/report.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'reports-list',
@@ -15,6 +16,7 @@ export class ReportsListComponent implements OnInit {
 
   constructor(
     private reportsService: ReportsService,
+    private router: Router,
     public dialog: MatDialog
   ) { }
 
@@ -57,5 +59,9 @@ export class ReportsListComponent implements OnInit {
     this.reportsService.delete(id).subscribe(() => {
       this.reports = this.reports.filter(r => r.id !== id);
     });
+  }
+
+  showHistory(id: number) {
+    this.router.navigate(['reports/' + id + '/history']);
   }
 }

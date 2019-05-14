@@ -23,11 +23,11 @@
           <mat-icon aria-label="Run">play_arrow</mat-icon>
           Run
         </button>
-        <button mat-raised-button matTooltip="Get latest result">
+        <!-- <button mat-raised-button matTooltip="Get latest result">
           <mat-icon aria-label="Result">get_app</mat-icon>
           Result
-        </button>
-        <button mat-raised-button matTooltip="View history">
+        </button> -->
+        <button mat-raised-button matTooltip="View history" (click)="showHistory(report.id)" >
           <mat-icon aria-label="History">history</mat-icon>
           History
         </button>
