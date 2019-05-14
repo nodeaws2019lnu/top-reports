@@ -36,13 +36,3 @@
 
 4. Additional:
     - see "../backend/README.md" for more detailed information
-    
-## Database
-
-1. Prerequisites:
-    - Postgres
-
-2. Setup:
-    - Create database "ReportSvc"
-    - navigate to ".../backend/resources/db/"
-    - execute script `init.sql`
