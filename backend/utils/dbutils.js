@@ -47,8 +47,8 @@ module.exports = {
                 })
                 .catch((err) => {
                     reject(err);
-                })
-        })
+                });
+        });
     },
     hash: function (str) {
         return crypto.createHash('sha256')

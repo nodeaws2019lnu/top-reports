@@ -21,9 +21,7 @@ exports.handler = (event, context, callback) => {
         const message = JSON.parse(event.Records[0].body);
         console.log(message);
         request.query(message.query, function (err, recordset) {
-
-            //if (err) console.log(err);
-
+           
             // send records as a response
             console.log(recordset);
             const csvData = csvjson.toCSV(recordset.recordset, {
@@ -32,7 +30,7 @@ exports.handler = (event, context, callback) => {
 
             var bucketName = process.env.s3_bucket_name;
             var fileExt = '.csv';
-            var fileName = `${message.name}_${message.date}_${message.time}${fileExt}`;
+            var fileName = `${message.name}@${message.reportId}@${message.date}@${message.time}${fileExt}`;
 
             const params = {
                 Bucket: bucketName,

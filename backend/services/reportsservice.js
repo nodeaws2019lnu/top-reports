@@ -120,7 +120,7 @@ module.exports = {
                 return db.query('SELECT * FROM report WHERE id = ?', [id])
                     .then(({rows}) => {
                         if (rows.length === 0) {
-                            return Promise.reject(new NotFoundError('Report not found'))
+                            return Promise.reject(new NotFoundError('Report not found'));
                         }
 
                         return rows.map(mapDbReport)[0];

@@ -1,4 +1,4 @@
-const AWS = require('aws-sdk');
+const AWS = require("aws-sdk");
 AWS.config.loadFromPath("../backend/sqs.config.json");
 const awsConfigs = require("../sqs.config.json");
 const config = require("../config.json");
