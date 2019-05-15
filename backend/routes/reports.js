@@ -42,9 +42,10 @@ router.get('/', defaultErrorHandling(function (req, res) {
 }));
 
 router.get('/getList', defaultErrorHandling(function (req, res) {
-    return reportservice.getS3Objects().then(reports => {
-        res.json(reports);
-    });
+    return reportservice.getS3Objects()
+        .then(files => {
+            res.json({files});
+        })
 }));
 
 router.get('/download/:name', function(req, res, next){

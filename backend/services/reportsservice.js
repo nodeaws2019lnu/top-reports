@@ -97,21 +97,39 @@ function getReportsToExecute() {
         })
 }
 
+function groupBy(list, keyGetter) {
+    const map = new Map();
+    list.forEach((item) => {
+        const key = keyGetter(item);
+        const collection = map.get(key);
+        if (!collection) {
+            map.set(key, [item]);
+        } else {
+            collection.push(item);
+        }
+    });
+    return map;
+}
+
 module.exports = {
     getReportExecutions: function (id) {
-        return db.query('SELECT * FROM report WHERE id = ?', [id])
-            .then(({rows}) => {
-                if (rows.length === 0) {
-                    return Promise.reject(new NotFoundError('Report not found'))
-                }
+        return integrations.getS3Objects()
+            .then(s3Data => {
+                s3Data = groupBy(s3Data, x => x.key);
 
-                return rows.map(mapDbReport)[0];
-            })
-            .then(report => {
-                const reportExecs = [];
-                //TODO fetch all report results from s3 by report id
-                return {reportExecs};
-            })
+                return db.query('SELECT * FROM report WHERE id = ?', [id])
+                    .then(({rows}) => {
+                        if (rows.length === 0) {
+                            return Promise.reject(new NotFoundError('Report not found'))
+                        }
+
+                        return rows.map(mapDbReport)[0];
+                    })
+                    .then(report => {
+                        const reportExecs = s3Data.get(report.id.toString());
+                        return {reportExecs};
+                    })
+            });
     },
     requestReports: function () {
         const currentDateTime = new Date();
@@ -127,7 +145,7 @@ module.exports = {
                         date: dateStr,
                         time: timeStr,
                         name: report.name
-                    };                    
+                    };
                     integrations.sendMessageToSQS(message);
                 });
 
@@ -157,7 +175,7 @@ module.exports = {
                 return rows.map(mapDbReport);
             });
     },
-    getS3Objects: function() {
+    getS3Objects: function () {
         return integrations.getS3Objects();
     },
     updateReport: function (reportData) {
