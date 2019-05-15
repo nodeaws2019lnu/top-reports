@@ -1,8 +1,11 @@
 .mat-dialog-content {
-    display: flex;
-    flex-direction: column;
-    height: 45vh;
-    width: 50vw;
+    height: 60vh;
+    width: 55vw;
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .mat-dialog-actions button:first-child {

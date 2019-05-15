@@ -1,23 +1,31 @@
 <h1 mat-dialog-title>{{isEdit() ? 'Edit' : 'Add new'}} report</h1>
 <div mat-dialog-content>
-  <mat-form-field>
-    <input matInput placeholder="Name" [(ngModel)]="data.name">
-  </mat-form-field>
+  <form [formGroup]="registerForm">
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="data.name" formControlName="name">
+    </mat-form-field>
 
-  <mat-form-field>
-    <textarea matInput class="command-textarea" placeholder="Command" [(ngModel)]="data.command"></textarea>
-  </mat-form-field>
+    <mat-form-field>
+      <textarea matInput class="command-textarea" placeholder="Query" [(ngModel)]="data.query" formControlName="query"></textarea>
+    </mat-form-field>
 
-  <mat-slide-toggle
-    [(ngModel)]="data.isRepeated">
-    Is repeated
-  </mat-slide-toggle>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Start date" [value]="data.startDate | date:'yyyy-MM-dd'" (dateChange)="onStartDateChanged($event.target.value)" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
-  <mat-form-field *ngIf="data.isRepeated">
-    <input matInput placeholder="Cron pattern" [(ngModel)]="data.repeatSchedule">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-raised-button (click)="onCancelClick()">Cancel</button>
-  <button mat-raised-button (click)="onSaveClicked()" cdkFocusInitial>Save</button>
+    <material-timepicker color="primary" label="Exec time" appearance="standard" [userTime]="execTime" (change)="onExecTimeChanged($event)"></material-timepicker>
+
+    <mat-form-field>
+      <mat-label>Period</mat-label>
+      <mat-select [(value)]="data.periodMode" formControlName="periodMode">
+        <mat-option *ngFor="let mode of periodModes" [value]="mode.value">{{mode.description}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-raised-button (click)="onCancelClick()">Cancel</button>
+      <button mat-raised-button (click)="onSaveClicked()" cdkFocusInitial>Save</button>
+    </div>
+  </form>
 </div>

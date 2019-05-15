@@ -11,8 +11,10 @@ export class ReportsHistoryService {
 
   constructor(private http: HttpClient) { }
 
-  // MOCKED
   public get(reportId: number) : Observable<ReportResult[]> {
+    return this.http.get<ReportResult[]>('reports/' + reportId + '/execs');
+
+    // MOCKED
     const data: ReportResult[] = [
       { 
         id: 1,
@@ -27,8 +29,8 @@ export class ReportsHistoryService {
     return of(data);
   }
   
-  // MOCKED
   public getResult(id: number) : Observable<Blob> {
+    // MOCKED
     const data = new Blob(['hello there'], { type: 'text/csv' });
 
     return of(data);
