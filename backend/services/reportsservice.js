@@ -27,7 +27,7 @@ function isTime(str) {
 
 function validatePeriodMode(periodMode) {
     return periodMode &&
-        (periodMode === 'o' || periodMode === 'd' || periodMode === 'w' || periodMode === 'm');
+        (periodMode === 'o' || periodMode === 'd' || periodMode === 'w' || periodMode === 'm' || periodMode === 'y');
 }
 
 function validateReport(reportData) {
@@ -59,29 +59,34 @@ function getReportsToExecute() {
                          WHEN r.PERIOD_MODE = 'o'
                            THEN (current_date = r.start_date
                            AND current_time >= r.EXEC_TIME
+                           AND extract(hour from (current_time::time - r.exec_time::time)::time) < 1
                            )
                          WHEN r.PERIOD_MODE = 'd'
                            THEN (current_date >= r.start_date
                            AND (r.END_DATE IS NULL OR current_date <= r.END_DATE)
                            AND current_time >= r.EXEC_TIME
+                           AND extract(hour from (current_time::time - r.exec_time::time)::time) < 1
                            )
                          WHEN r.PERIOD_MODE = 'w'
                            THEN (current_date >= r.start_date
                            AND extract(dow from r.start_date) = extract(dow from current_date)
                            AND (r.END_DATE IS NULL OR current_date <= r.END_DATE)
                            AND current_time >= r.EXEC_TIME
+                           AND extract(hour from (current_time::time - r.exec_time::time)::time) < 1
                            )
                          WHEN r.PERIOD_MODE = 'm'
                            THEN (current_date >= r.start_date
                            AND extract(day from r.start_date) = extract(day from current_date)
                            AND (r.END_DATE IS NULL OR current_date <= r.END_DATE)
                            AND current_time >= r.EXEC_TIME
+                           AND extract(hour from (current_time::time - r.exec_time::time)::time) < 1
                            )
                          WHEN r.PERIOD_MODE = 'y'
                            THEN (current_date >= r.start_date
                            AND extract(doy from r.start_date) = extract(doy from current_date)
                            AND (r.END_DATE IS NULL OR current_date <= r.END_DATE)
                            AND current_time >= r.EXEC_TIME
+                           AND extract(hour from (current_time::time - r.exec_time::time)::time) < 1
                            )
                          ELSE FALSE END
                        )
@@ -157,6 +162,7 @@ module.exports = {
             .then(reports => {
                 const insertExecs = [];
                 reports.forEach(report => {
+                    console.log(`Report ${report.id} sent to execution`);
                     insertExecs.push(db.query(`INSERT INTO report_exec_data (exec_time, report_id)
                                                VALUES (to_timestamp(?, 'YYYY-MM-DD HH24-MI-SS'), ?)`,
                         [dateStr + ' ' + report.execTime, report.id]));

@@ -175,4 +175,4 @@ WHERE (
            and red.EXEC_TIME::date = current_date)
   );
 
-select red.exec_time::date = current_date::date, current_date, red.exec_time::date from report_exec_data red;
+select extract(hour from (current_time::time - red.exec_time::time)::time) > 10 from report_exec_data red;
