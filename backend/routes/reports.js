@@ -1,6 +1,7 @@
 const express = require('express');
 const reportservice = require('../services/reportsservice');
 const defaultErrorHandling = require('../utils/errorutils').defaultErrorHandling;
+const integrations = require('../utils/integrations');
 
 const router = express.Router();
 
@@ -39,5 +40,20 @@ router.get('/', defaultErrorHandling(function (req, res) {
         res.json(reports);
     });
 }));
+
+router.get('/getList', defaultErrorHandling(function (req, res) {
+    return reportservice.getS3Objects().then(reports => {
+        res.json(reports);
+    });
+}));
+
+router.get('/download/:name', function(req, res, next){
+    var fileKey = req.params.name;
+    console.log('Trying to download file', fileKey);
+
+    res.attachment(fileKey);
+    var fileStream = integrations.download(fileKey);
+    fileStream.pipe(res);
+});
 
 module.exports = router;
