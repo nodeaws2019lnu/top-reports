@@ -8,11 +8,11 @@
     - Angular CLI (for angular 7+)
 
 2. Init:
-    - navigate to ".../fronend/top-reports/"
+    - navigate to ".../frontend/top-reports/"
     - run `npm install`
 
 3. Run:
-    - navigate to ".../fronend/top-reports/"
+    - navigate to ".../frontend/top-reports/"
     - run `ng serve`
     - open [http://localhost:4200/](http://localhost:4200/)
 
