@@ -29,8 +29,8 @@ export class ReportHistoryComponent implements OnInit {
     });
   }
 
-  downloadResult(id: number) {
-    this.reportsHistoryService.getResult(id).subscribe(blob => {
+  downloadResult(fileName: number) {
+    this.reportsHistoryService.getResult(fileName).subscribe(blob => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;

@@ -1,4 +1,6 @@
 export interface ReportResult {
-    id: number;
-    timeFinished: Date;
+    key: string;
+    date: string;
+    time: string;
+    fileName: string;
 }

@@ -5,11 +5,11 @@
     <mat-card>
 
       <mat-card-content>
-        <h2>Time: {{result.timeFinished | date:'yyyy MMM dd HH:mm:ss'}}</h2>
+        <h2>Time: {{result.date}} {{result.time}}</h2>
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-raised-button matTooltip="Download result" (click)="downloadResult(result.id)">
+        <button mat-raised-button matTooltip="Download result" (click)="downloadResult(result.fileName)">
           <mat-icon aria-label="Result">get_app</mat-icon>
           Result
         </button>

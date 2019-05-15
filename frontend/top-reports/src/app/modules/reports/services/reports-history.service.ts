@@ -17,19 +17,25 @@ export class ReportsHistoryService {
     // MOCKED
     const data: ReportResult[] = [
       { 
-        id: 1,
-        timeFinished: new Date()
+        key: '1',
+        date: '2019-05-15',
+        time: '21-23-00',
+        fileName: 'abc1'
       },
       { 
-        id: 2,
-        timeFinished: new Date()
+        key: '2',
+        date: '2019-05-14',
+        time: '21-33-00',
+        fileName: 'test 123 a'
       }
     ];
 
     return of(data);
   }
   
-  public getResult(id: number) : Observable<Blob> {
+  public getResult(fileName: number) : Observable<Blob> {
+    return this.http.get<Blob>('reports/download/' + fileName);
+
     // MOCKED
     const data = new Blob(['hello there'], { type: 'text/csv' });
 
