@@ -29,15 +29,18 @@ export class ReportHistoryComponent implements OnInit {
     });
   }
 
-  downloadResult(fileName: number) {
-    this.reportsHistoryService.getResult(fileName).subscribe(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    })
+  downloadResult(fileName: string) {
+    this.reportsHistoryService.getResult(fileName)
+      .subscribe(data => {
+        const url = window.URL.createObjectURL(data);
+        const link = document.createElement('a');
+
+        link.href = url;
+        link.download = fileName;
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
   }
 }
