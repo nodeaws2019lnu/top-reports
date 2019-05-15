@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReportsListComponent } from './components/reports-list/reports-list.component';
-import { MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule } from '@angular/material';
+
+import { MaterialTimePickerModule } from '@candidosales/material-time-picker';
+
 import { ReportComponent } from './components/report/report.component';
-import { FormsModule } from '@angular/forms';
+import { ReportsListComponent } from './components/reports-list/reports-list.component';
 import { ReportHistoryComponent } from './components/report-history/report-history.component';
 
 @NgModule({
@@ -15,6 +18,7 @@ import { ReportHistoryComponent } from './components/report-history/report-histo
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
@@ -22,7 +26,11 @@ import { ReportHistoryComponent } from './components/report-history/report-histo
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MaterialTimePickerModule,
+    MatSelectModule
   ],
   exports: [
     ReportsListComponent

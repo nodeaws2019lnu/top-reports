@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class HttpOptionsInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // TODO: move to cfg
-        const baseUri = 'http://localhost:5000/api/';
+        const baseUri = 'http://localhost:3000/';
 
         const headers = req.headers
             .set('Content-Type', 'application/json')

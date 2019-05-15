@@ -127,7 +127,7 @@ module.exports = {
                     })
                     .then(report => {
                         const reportExecs = s3Data.get(report.id.toString());
-                        return {reportExecs};
+                        return reportExecs;
                     })
             });
     },

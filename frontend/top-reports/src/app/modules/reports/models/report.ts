@@ -1,7 +1,8 @@
 export interface Report {
     id:  number;
     name: string;
-    command: string,
-    isRepeated: boolean;
-    repeatSchedule?: string;
+    query: string,
+    startDate: string;
+    execTime: string;
+    periodMode: string;
 }
