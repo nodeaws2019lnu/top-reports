@@ -28,12 +28,12 @@ app.listen(3000);
 
 
 //For testing purposes uncomment code to send messages to sqs on startup
-/* reportservice.requestReports(); */
+// reportservice.requestReports(); 
 
 //Schedules job once a minute. Job generates all matching reports
 scheduler.scheduleJob("* * * * *", function (fireDate) {
     reportservice.requestReports();
-    console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+    console.log(`This job was supposed to run at ${fireDate}, but actually ran at ${Date()}`);
 });
 
 module.exports = app;

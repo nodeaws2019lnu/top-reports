@@ -1,11 +1,12 @@
-const db = require('../utils/dbutils');
+const db = require("../utils/dbutils");
 const NotFoundError = require("../errors/errors").NotFoundError;
-const ValidationError = require('../errors/errors').ValidationError;
+const ValidationError = require("../errors/errors").ValidationError;
+const integrations = require("../utils/integrations");
 
 function mapDatePart(datePart, len) {
     datePart = String(datePart);
 
-    return '0'.repeat(Math.max(datePart.length - len, 0)) + datePart
+    return '0'.repeat(Math.max(datePart.length - len, 0)) + datePart;
 }
 
 function formatDate(date) {
@@ -17,7 +18,7 @@ function formatTime(date) {
 }
 
 function isDate(str) {
-    return str.match(/(\d{4})-(\d{2})-(\d{2})/)
+    return str.match(/(\d{4})-(\d{2})-(\d{2})/);
 }
 
 function isTime(str) {
@@ -51,7 +52,7 @@ function mapDbReport(dbReport) {
 }
 
 function getReportsToExecute() {
-    return db.query(`SELECT *
+    return db.query(`SELECT * 
                      FROM REPORT r
                      WHERE (
                        CASE
@@ -124,9 +125,10 @@ module.exports = {
                         reportId: report.id,
                         query: report.query,
                         date: dateStr,
-                        time: timeStr
-                    }
-                    //TODO Send message to sqs
+                        time: timeStr,
+                        name: report.name
+                    };                    
+                    integrations.sendMessageToSQS(message);
                 });
 
                 return Promise.all(messageExecs)
@@ -145,7 +147,7 @@ module.exports = {
                 return Promise.all(insertExecs);
             }, err => {
                 if (err) {
-                    console.error(err)
+                    console.error(err);
                 }
             })
     },
@@ -154,6 +156,9 @@ module.exports = {
             .then(({rows}) => {
                 return rows.map(mapDbReport);
             });
+    },
+    getS3Objects: function() {
+        return integrations.getS3Objects();
     },
     updateReport: function (reportData) {
         if (!validateReport(reportData)) {

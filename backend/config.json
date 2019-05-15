@@ -1,0 +1,4 @@
+{
+    "sqsUrl": "https://sqs.us-east-2.amazonaws.com/594197336349/QueriesQueue",
+    "s3BucketName": "reports-northwind"
+}
